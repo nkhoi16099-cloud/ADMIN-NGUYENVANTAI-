@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGUYỄN VĂN TÀI STORE - Check Uy Tín 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-logo">
+            <svg width="80" height="80" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3b82f6"/>
+                        <stop offset="100%" stop-color="#06b6d4"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="45" fill="none" stroke="url(#grad)" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="283" class="loader-circle"/>
+                <text x="50" y="55" text-anchor="middle" fill="url(#grad)" font-size="24" font-weight="bold" font-family="Inter">NVT</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Mouse Spotlight -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Aurora Background -->
+    <div class="aurora-bg">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+    </div>
+
+    <!-- Floating Icons -->
+    <div class="floating-icons">
+        <i class="fas fa-shield-alt icon-float icon-1"></i>
+        <i class="fas fa-star icon-float icon-2"></i>
+        <i class="fas fa-check-circle icon-float icon-3"></i>
+        <i class="fas fa-crown icon-float icon-4"></i>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Header -->
+    <header class="header glass-card">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon pulse-glow">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name gradient-text">NGUYỄN VĂN TÀI STORE</span>
+                    <span class="logo-tagline">✔ ACC Game ✔ Uy tín ✔ Bảo hành</span>
+                </div>
+            </a>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active">Trang chủ</a>
+                <a href="#check" class="nav-link">Check Uy Tín</a>
+                <a href="#services" class="nav-link">Dịch vụ</a>
+                <a href="#stats" class="nav-link">Thống kê</a>
+                <a href="#commitment" class="nav-link">Cam kết</a>
+                <a href="#feedback" class="nav-link">Đánh giá</a>
+                <a href="#contact" class="nav-link">Liên hệ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-badge glass-card">🛡️ Hệ thống kiểm tra uy tín 2026</div>
+                <h1 class="hero-title">
+                    <span id="typing-text"></span><span class="cursor-blink">|</span>
+                </h1>
+                <p class="hero-desc">Hệ thống kiểm tra uy tín giao dịch, thống kê đơn hàng thành công, khách hàng đánh giá và lịch sử giao dịch minh bạch.</p>
+                <div class="btn-group">
+                    <a href="https://zalo.me/84367573935" class="btn btn-primary ripple-btn"><i class="fas fa-comment"></i> Zalo: 0367537935</a>
+                    <a href="https://t.me/RICK_NBAK" class="btn btn-telegram ripple-btn"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="btn btn-facebook ripple-btn"><i class="fab fa-facebook"></i> Facebook</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Check Uy Tín Section -->
+        <section class="section" id="check">
+            <div class="container">
+                <div class="check-card glass-card gradient-border">
+                    <h2 class="section-title"><i class="fas fa-search"></i> Kiểm tra uy tín Admin</h2>
+                    <p class="section-subtitle">Nhập thông tin để xác minh chính chủ</p>
+                    <div class="input-group">
+                        <input type="text" class="check-input" id="checkInput" placeholder="Nhập SĐT / STK / Link FB / Zalo / Telegram...">
+                        <button class="btn-check ripple-btn" id="checkBtn"><i class="fas fa-fingerprint"></i> Xác minh</button>
+                    </div>
+                    <!-- Badge thông báo cọc tiền -->
+                    <div class="deposit-badge glass-card">
+                        <i class="fas fa-check-circle"></i> Nguyễn Văn Tài đã cọc cho Tạ Hoàng Thanh <strong>50 triệu đồng</strong> - Đủ uy tín trở thành <strong>ADMIN giao dịch trung gian</strong>
+                    </div>
+                    <div class="result-card glass-card" id="resultCard">
+                        <div class="result-header">
+                            <div class="result-avatar pulse-glow">NVT</div>
+                            <div class="result-info">
+                                <h3>Nguyễn Văn Tài</h3>
+                                <div class="verified-badge"><span class="verified-dot"></span> ĐÃ XÁC MINH - UY TÍN 99.9%</div>
+                            </div>
+                            <div class="result-seal"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="result-details">
+                            <div class="detail-item"><span class="detail-label">Điểm uy tín</span><span class="detail-value trust-score">99.9%</span></div>
+                            <div class="detail-item"><span class="detail-label">Đơn thành công</span><span class="detail-value">2.500+</span></div>
+                            <div class="detail-item"><span class="detail-label">Đánh giá</span><span class="detail-value stars">★★★★★</span></div>
+                            <div class="detail-item"><span class="detail-label">Hoạt động</span><span class="detail-value">2022 - Nay</span></div>
+                        </div>
+                        <div class="result-contact">
+                            <a href="https://zalo.me/84367573935" class="contact-chip zalo-chip"><i class="fas fa-comment"></i> Zalo Admin</a>
+                            <a href="https://t.me/RICK_NBAK" class="contact-chip tele-chip"><i class="fab fa-telegram"></i> Telegram</a>
+                            <a href="https://www.facebook.com/profile.php?id=100000097307591" class="contact-chip fb-chip"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                    <div class="error-card glass-card" id="errorCard">
+                        <div class="error-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                        <h3 class="error-title">⚠️ CẢNH BÁO!</h3>
+                        <p class="error-message" id="errorMessage">Không tìm thấy thông tin Admin.</p>
+                        <div class="error-details">
+                            <p><i class="fas fa-exclamation-triangle"></i> Thông tin <strong>KHÔNG KHỚP</strong> với dữ liệu chính chủ</p>
+                            <p><i class="fas fa-skull"></i> <strong>Khả năng SCAM rất cao!</strong></p>
+                            <p><i class="fas fa-ban"></i> Tuyệt đối không giao dịch</p>
+                        </div>
+                        <a href="https://zalo.me/84367573935" class="btn btn-primary">Liên hệ Admin chính chủ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dịch vụ -->
+        <section class="section section-dark" id="services">
+            <div class="container">
+                <h2 class="section-title">🎮 Dịch vụ Game</h2>
+                <p class="section-subtitle">Chuyên cung cấp tài khoản game uy tín - Bảo hành dài hạn</p>
+                <div class="services-grid">
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="service-card glass-card card-3d" data-game="lienquan">
+                        <div class="service-icon">⚔️</div><h3>Liên Quân</h3><p>Acc Cao Thủ - Chiến Tướng</p><span class="service-badge">Hot</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="service-card glass-card card-3d" data-game="freefire">
+                        <div class="service-icon">🔥</div><h3>Free Fire</h3><p>Acc Huyền Thoại - Skin Súng</p><span class="service-badge">Rẻ</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="service-card glass-card card-3d" data-game="pubg">
+                        <div class="service-icon">🎯</div><h3>PUBG Mobile</h3><p>Acc Conqueror - Skin Xịn</p><span class="service-badge">Ngon</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="service-card glass-card card-3d" data-game="valorant">
+                        <div class="service-icon">💎</div><h3>Valorant</h3><p>Acc Radiant - Premium</p><span class="service-badge">VIP</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="service-card glass-card card-3d" data-game="tocchien">
+                        <div class="service-icon">🏆</div><h3>Tốc Chiến</h3><p>Acc Thách Đấu - Full Tướng</p><span class="service-badge">Mới</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100000097307591" class="service-card glass-card card-3d" data-game="genshin">
+                        <div class="service-icon">🌟</div><h3>Genshin Impact</h3><p>AR60 - 5 Sao</p><span class="service-badge">VIP</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thống kê -->
+        <section class="section" id="stats">
+            <div class="container">
+                <h2 class="section-title">📊 Thống kê</h2>
+                <p class="section-subtitle">Con số biết nói về uy tín của chúng tôi</p>
+                <div class="stats-grid">
+                    <div class="stat-card glass-card card-3d"><div class="stat-number" data-target="2500">0</div><div class="stat-label">+ Đơn thành công</div></div>
+                    <div class="stat-card glass-card card-3d"><div class="stat-number" data-target="1500">0</div><div class="stat-label">+ Khách hàng</div></div>
+                    <div class="stat-card glass-card card-3d"><div class="stat-number" data-target="99.9">0</div><div class="stat-label">% Uy tín</div></div>
+                    <div class="stat-card glass-card card-3d"><div class="stat-number" data-target="4">0</div><div class="stat-label">+ Năm kinh nghiệm</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cam kết -->
+        <section class="section section-dark" id="commitment">
+            <div class="container">
+                <h2 class="section-title">🛡️ Cam kết</h2>
+                <div class="commit-grid">
+                    <div class="commit-card glass-card"><div class="commit-icon">✅</div><h3>Không lừa đảo</h3><p>Minh bạch, rõ ràng</p></div>
+                    <div class="commit-card glass-card"><div class="commit-icon">🔒</div><h3>Bảo hành</h3><p>Hỗ trợ trọn đời</p></div>
+                    <div class="commit-card glass-card"><div class="commit-icon">💳</div><h3>Trung gian</h3><p>An toàn tuyệt đối</p></div>
+                    <div class="commit-card glass-card"><div class="commit-icon">⭐</div><h3>24/7</h3><p>Hỗ trợ liên tục</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback -->
+        <section class="section" id="feedback">
+            <div class="container">
+                <h2 class="section-title">💬 Hơn 3285 khách hàng thực tế</h2>
+                <p class="section-subtitle">Đánh giá từ những người đã giao dịch thành công</p>
+                <div class="feedback-carousel">
+                    <div class="feedback-track" id="feedbackTrack"></div>
+                </div>
+                <!-- Form đánh giá có sao chọn được -->
+                <div class="review-form glass-card">
+                    <h3>📝 Đánh giá của bạn</h3>
+                    <div class="stars-input" id="starsInput">
+                        <i class="fas fa-star star-item" data-value="1"></i>
+                        <i class="fas fa-star star-item" data-value="2"></i>
+                        <i class="fas fa-star star-item" data-value="3"></i>
+                        <i class="fas fa-star star-item" data-value="4"></i>
+                        <i class="fas fa-star star-item" data-value="5"></i>
+                    </div>
+                    <textarea class="review-textarea" placeholder="Chia sẻ trải nghiệm của bạn..."></textarea>
+                    <button class="btn btn-primary ripple-btn" id="submitReview"><i class="fas fa-paper-plane"></i> Gửi đánh giá</button>
+                    <p class="review-note">Đánh giá của bạn sẽ được kiểm duyệt trước khi hiển thị công khai.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer glass-card" id="contact">
+        <div class="container footer-inner">
+            <div class="footer-info">
+                <h3 class="gradient-text">Nguyễn Văn Tài Store</h3>
+                <p><i class="fas fa-envelope"></i> Contact.NguyenVanTai.store@gmail.com</p>
+                <p><i class="fas fa-phone"></i> 0367537935</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/profile.php?id=100000097307591" class="footer-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://zalo.me/84367573935" class="footer-link"><i class="fas fa-comment"></i></a>
+                <a href="https://t.me/RICK_NBAK" class="footer-link"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+        <p class="footer-copyright">© 2026 Nguyễn Văn Tài Store. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
