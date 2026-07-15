@@ -66,7 +66,7 @@ document.querySelectorAll('.ripple-btn').forEach(btn=>{
 const adminInfo={
   phones:['0367537935','0367.537.935','+84367537935','367537935','84367573935'],
   tele:['rick_nbak','@rick_nbak','t.me/rick_nbak'],
-  fb:['100000097307591','https://www.facebook.com/share/18tMsZtyJR/?mibextid=wwXIfr'],
+  fb: ['100000097307591', 'https://www.facebook.com/share/18tMsZtyJR/'],
   email:'contact.nguyenvantai.store@gmail.com'
 };
 function normalize(s){return s.toLowerCase().replace(/\\s+/g,'').replace(/[-_.]/g,'')}
