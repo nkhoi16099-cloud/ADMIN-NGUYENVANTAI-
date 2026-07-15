@@ -62,77 +62,96 @@ document.querySelectorAll('.ripple-btn').forEach(btn=>{
   });
 });
 
-// ============ CHECK UY TÍN ============
-const adminInfo={
-  phones:['0367537935','0367.537.935','+84367537935','367537935','84367573935'],
-  tele:['rick_nbak','@rick_nbak','t.me/rick_nbak'],
-  fb: ['100000097307591', 'https://www.facebook.com/share/18tMsZtyJR/'],
-  email:'contact.nguyenvantai.store@gmail.com'
+// ============ CHECK UY TÍN (đã thêm link FB mới + số 092880947) ============
+const adminInfo = {
+  phones: ['0367537935', '0367.537.935', '+84367537935', '367537935', '84367573935', '092880947', '+8492880947', '0928.809.47', '92880947'],
+  tele: ['rick_nbak', '@rick_nbak', 't.me/rick_nbak'],
+  fb: [
+    '100000097307591',
+    'facebook.com/share/18tMsZtyJR',
+    'fb.com/share/18tMsZtyJR',
+    '18tMsZtyJR'  // thêm id bài viết để nhận diện dễ hơn
+  ],
+  email: 'contact.nguyenvantai.store@gmail.com'
 };
-function normalize(s){return s.toLowerCase().replace(/\\s+/g,'').replace(/[-_.]/g,'')}
-function isAdmin(input){
-  const n=normalize(input);
-  if(adminInfo.phones.some(p=>n.includes(normalize(p))))return true;
-  if(adminInfo.tele.some(t=>n.includes(t)))return true;
-  if(n.includes('100000097307591'))return true;
-  if(n.includes('contact.nguyenvantai.store@gmail.com'))return true;
-  if(n.includes('0367537935')||n.includes('367537935'))return true;
+
+function normalize(s) {
+  return s.toLowerCase().replace(/\s+/g, '').replace(/[-_.]/g, '');
+}
+
+function isAdmin(input) {
+  const n = normalize(input);
+  // Kiểm tra số điện thoại
+  if (adminInfo.phones.some(p => n.includes(normalize(p)))) return true;
+  // Kiểm tra Telegram
+  if (adminInfo.tele.some(t => n.includes(t))) return true;
+  // Kiểm tra Facebook (UID hoặc link share)
+  if (adminInfo.fb.some(f => n.includes(normalize(f)))) return true;
+  // Kiểm tra email
+  if (n.includes('contact.nguyenvantai.store@gmail.com')) return true;
+  // STK thường trùng SĐT
+  if (n.includes('0367537935') || n.includes('367537935') || n.includes('092880947')) return true;
   return false;
 }
-const checkInput=document.getElementById('checkInput');
-const checkBtn=document.getElementById('checkBtn');
-const resultCard=document.getElementById('resultCard');
-const errorCard=document.getElementById('errorCard');
-checkBtn.addEventListener('click',()=>{
-  const val=checkInput.value.trim();
+
+const checkInput = document.getElementById('checkInput');
+const checkBtn = document.getElementById('checkBtn');
+const resultCard = document.getElementById('resultCard');
+const errorCard = document.getElementById('errorCard');
+
+checkBtn.addEventListener('click', () => {
+  const val = checkInput.value.trim();
   resultCard.classList.remove('show');
   errorCard.classList.remove('show');
-  if(!val){errorCard.classList.add('show');return}
-  checkBtn.disabled=true;
-  checkBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Đang kiểm tra...';
-  setTimeout(()=>{
-    if(isAdmin(val)){
+  if (!val) {
+    errorCard.classList.add('show');
+    return;
+  }
+  checkBtn.disabled = true;
+  checkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang kiểm tra...';
+  setTimeout(() => {
+    if (isAdmin(val)) {
       resultCard.classList.add('show');
-      resultCard.scrollIntoView({behavior:'smooth',block:'center'});
-    }else{
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
       errorCard.classList.add('show');
-      errorCard.scrollIntoView({behavior:'smooth',block:'center'});
+      errorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    checkBtn.disabled=false;
-    checkBtn.innerHTML='<i class="fas fa-fingerprint"></i> Xác minh';
-  },800);
+    checkBtn.disabled = false;
+    checkBtn.innerHTML = '<i class="fas fa-fingerprint"></i> Xác minh';
+  }, 800);
 });
 
 // ============ COUNTER ============
-let countersStarted=false;
-function startCounters(){
-  if(countersStarted)return;
-  countersStarted=true;
-  document.querySelectorAll('.stat-number[data-target]').forEach(stat=>{
-    const target=parseFloat(stat.dataset.target);
-    const isFloat=target%1!==0;
-    const duration=2000;
-    const start=performance.now();
-    function update(now){
-      const progress=Math.min((now-start)/duration,1);
-      const eased=1-Math.pow(1-progress,3);
-      const current=target*eased;
-      stat.textContent=isFloat?current.toFixed(1):Math.floor(current);
-      if(progress<1)requestAnimationFrame(update);
-      else stat.textContent=target+(isFloat?'%':'+');
+let countersStarted = false;
+function startCounters() {
+  if (countersStarted) return;
+  countersStarted = true;
+  document.querySelectorAll('.stat-number[data-target]').forEach(stat => {
+    const target = parseFloat(stat.dataset.target);
+    const isFloat = target % 1 !== 0;
+    const duration = 2000;
+    const start = performance.now();
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      stat.textContent = isFloat ? current.toFixed(1) : Math.floor(current);
+      if (progress < 1) requestAnimationFrame(update);
+      else stat.textContent = target + (isFloat ? '%' : '+');
     }
     requestAnimationFrame(update);
   });
 }
-const statsObserver=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){startCounters();statsObserver.unobserve(entries[0].target)}
-},{threshold:0.3});
-const statsSection=document.getElementById('stats');
-if(statsSection)statsObserver.observe(statsSection);
+const statsObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { startCounters(); statsObserver.unobserve(entries[0].target); }
+}, { threshold: 0.3 });
+const statsSection = document.getElementById('stats');
+if (statsSection) statsObserver.observe(statsSection);
 
 // ============ FEEDBACK (tự nhiên) ============
-const names=['Tuấn Anh','Minh Hoàng','Thanh Hà','Hoài Nam','Phương Thảo','Văn Đức','Ngọc Diệp','Quang Huy','Mỹ Linh','Trung Kiên','Hải Yến','Đình Phong','Kim Ngân','Bảo Long','Thu Hằng','Công Vinh','Lan Hương','Thế Vinh','Hồng Nhung','Anh Dũng'];
-const comments=[
+const names = ['Tuấn Anh','Minh Hoàng','Thanh Hà','Hoài Nam','Phương Thảo','Văn Đức','Ngọc Diệp','Quang Huy','Mỹ Linh','Trung Kiên','Hải Yến','Đình Phong','Kim Ngân','Bảo Long','Thu Hằng','Công Vinh','Lan Hương','Thế Vinh','Hồng Nhung','Anh Dũng'];
+const comments = [
   'Giao dịch ok, acc về tay nhanh. Lần đầu mua cũng hơi lo nhưng được bảo hành đàng hoàng.',
   'Mua acc Free Fire cho em trai, shop hỗ trợ nhiệt tình, giá cả phải chăng.',
   'Mình đã mua 2 lần, lần nào cũng ưng ý. Nói chung là đáng tin cậy.',
@@ -154,97 +173,146 @@ const comments=[
   'Mình ở nước ngoài vẫn giao dịch được. Ship code nhanh gọn.',
   'Lần sau cần mua acc game sẽ ủng hộ tiếp. Rất đáng để giới thiệu.'
 ];
-function renderFeedback(count=300){
-  const track=document.getElementById('feedbackTrack');
-  let html='';
-  for(let i=0;i<count;i++){
-    const name=names[i%names.length]+(i>=names.length?` ${Math.floor(i/names.length)+1}`:'');
-    const comment=comments[i%comments.length];
-    const initials=name.split(' ').pop().charAt(0)+name.charAt(0);
-    html+=`<div class="feedback-card glass-card">
+function renderFeedback(count = 300) {
+  const track = document.getElementById('feedbackTrack');
+  let html = '';
+  for (let i = 0; i < count; i++) {
+    const name = names[i % names.length] + (i >= names.length ? ` ${Math.floor(i / names.length) + 1}` : '');
+    const comment = comments[i % comments.length];
+    const initials = name.split(' ').pop().charAt(0) + name.charAt(0);
+    html += `<div class="feedback-card glass-card">
       <div class="feedback-avatar">${initials}</div>
       <h4>${name}</h4>
       <div class="feedback-stars">★★★★★</div>
       <p class="feedback-text">"${comment}"</p>
     </div>`;
   }
-  track.innerHTML=html+html;
+  track.innerHTML = html + html;
 }
 renderFeedback(300);
 
 // ============ STAR RATING INPUT ============
-const stars=document.querySelectorAll('.star-item');
-let selectedRating=0;
-stars.forEach(star=>{
-  star.addEventListener('click',()=>{
-    selectedRating=parseInt(star.dataset.value);
+const stars = document.querySelectorAll('.star-item');
+let selectedRating = 0;
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+    selectedRating = parseInt(star.dataset.value);
     updateStars();
   });
-  star.addEventListener('mouseenter',()=>{
-    const value=parseInt(star.dataset.value);
-    stars.forEach(s=>s.classList.toggle('active',parseInt(s.dataset.value)<=value));
+  star.addEventListener('mouseenter', () => {
+    const value = parseInt(star.dataset.value);
+    stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= value));
   });
 });
-document.querySelector('.stars-input').addEventListener('mouseleave',updateStars);
-function updateStars(){
-  stars.forEach(s=>s.classList.toggle('active',parseInt(s.dataset.value)<=selectedRating));
+document.querySelector('.stars-input').addEventListener('mouseleave', updateStars);
+function updateStars() {
+  stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating));
 }
 
 // ============ SUBMIT REVIEW ============
-document.getElementById('submitReview').addEventListener('click',()=>{
-  const textarea=document.querySelector('.review-textarea');
-  if(textarea.value.trim()&&selectedRating>0){
+document.getElementById('submitReview').addEventListener('click', () => {
+  const textarea = document.querySelector('.review-textarea');
+  if (textarea.value.trim() && selectedRating > 0) {
     alert(`✅ Cảm ơn bạn đã đánh giá ${selectedRating} sao!\nĐánh giá sẽ được kiểm duyệt và hiển thị sớm.`);
-    textarea.value='';
-    selectedRating=0;
+    textarea.value = '';
+    selectedRating = 0;
     updateStars();
-  }else{
+  } else {
     alert('Vui lòng chọn số sao và nhập nội dung đánh giá.');
   }
 });
 
 // ============ BACK TO TOP ============
-const backToTop=document.getElementById('backToTop');
-window.addEventListener('scroll',()=>{
-  backToTop.classList.toggle('show',window.scrollY>500);
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('show', window.scrollY > 500);
 });
-backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ============ PARTICLES CANVAS ============
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+resizeCanvas();
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.5 + 0.1;
+  }
+  update() {
+    this.x += this.speedX; this.y += this.speedY;
+    if (this.x < 0) this.x = canvas.width; if (this.x > canvas.width) this.x = 0;
+    if (this.y < 0) this.y = canvas.height; if (this.y > canvas.height) this.y = 0;
+  }
+  draw() {
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(59,130,246,${this.opacity})`; ctx.fill();
+  }
+}
+function initParticles() {
+  particles = [];
+  const count = Math.min(60, Math.floor((canvas.width * canvas.height) / 20000));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+initParticles();
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p1, i) => {
+    p1.update(); p1.draw();
+    particles.slice(i + 1).forEach(p2 => {
+      const dx = p1.x - p2.x, dy = p1.y - p2.y, dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 130) {
+        ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(59,130,246,${0.06 * (1 - dist / 130)})`; ctx.lineWidth = 0.5; ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
 
 // ============ SCROLL REVEAL ============
-const revealElements=document.querySelectorAll('.section,.service-card,.stat-card,.commit-card');
-const revealObserver=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.style.opacity='1';
-      entry.target.style.transform='translateY(0)';
+const revealElements = document.querySelectorAll('.section,.service-card,.stat-card,.commit-card');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
     }
   });
-},{threshold:0.1});
-revealElements.forEach(el=>{
-  el.style.opacity='0';
-  el.style.transform='translateY(30px)';
-  el.style.transition='0.6s ease';
+}, { threshold: 0.1 });
+revealElements.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = '0.6s ease';
   revealObserver.observe(el);
 });
 
 // ============ CARD 3D TILT ============
-document.querySelectorAll('.card-3d').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const rect=card.getBoundingClientRect();
-    const x=e.clientX-rect.left-rect.width/2;
-    const y=e.clientY-rect.top-rect.height/2;
-    card.style.transform=`perspective(1000px) rotateY(${x/15}deg) rotateX(${-y/15}deg) translateY(-5px)`;
+document.querySelectorAll('.card-3d').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    card.style.transform = `perspective(1000px) rotateY(${x / 15}deg) rotateX(${-y / 15}deg) translateY(-5px)`;
   });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform='perspective(1000px) rotateY(0) rotateX(0) translateY(0)';
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateY(0)';
   });
 });
 
 // Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-  anchor.addEventListener('click',function(e){
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    const target=document.querySelector(this.getAttribute('href'));
-    if(target)window.scrollTo({top:target.offsetTop-100,behavior:'smooth'});
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
   });
 });
