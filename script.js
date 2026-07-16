@@ -62,15 +62,15 @@ document.querySelectorAll('.ripple-btn').forEach(btn=>{
   });
 });
 
-// ============ CHECK UY TÍN (đã thêm link FB mới + số 092880947) ============
+// ============ CHECK UY TÍN (CẬP NHẬT FACEBOOK MỚI + UID MỚI) ============
 const adminInfo = {
   phones: ['0367537935', '0367.537.935', '+84367537935', '367537935', '84367573935', '092880947', '+8492880947', '0928.809.47', '92880947'],
   tele: ['rick_nbak', '@rick_nbak', 't.me/rick_nbak'],
   fb: [
-    '100000097307591',
-    'facebook.com/share/18tMsZtyJR',
-    'fb.com/share/18tMsZtyJR',
-    '18tMsZtyJR'  // thêm id bài viết để nhận diện dễ hơn
+    '61591888322977',                     // UID gốc mới
+    'facebook.com/share/1BxDAVdgZM',      // link share mới
+    'fb.com/share/1BxDAVdgZM',            // rút gọn
+    '1BxDAVdgZM'                          // ID bài viết
   ],
   email: 'contact.nguyenvantai.store@gmail.com'
 };
@@ -85,7 +85,7 @@ function isAdmin(input) {
   if (adminInfo.phones.some(p => n.includes(normalize(p)))) return true;
   // Kiểm tra Telegram
   if (adminInfo.tele.some(t => n.includes(t))) return true;
-  // Kiểm tra Facebook (UID hoặc link share)
+  // Kiểm tra Facebook (UID mới hoặc link share mới)
   if (adminInfo.fb.some(f => n.includes(normalize(f)))) return true;
   // Kiểm tra email
   if (n.includes('contact.nguyenvantai.store@gmail.com')) return true;
@@ -228,55 +228,6 @@ window.addEventListener('scroll', () => {
   backToTop.classList.toggle('show', window.scrollY > 500);
 });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-// ============ PARTICLES CANVAS ============
-const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
-resizeCanvas();
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 0.5;
-    this.speedX = (Math.random() - 0.5) * 0.4;
-    this.speedY = (Math.random() - 0.5) * 0.4;
-    this.opacity = Math.random() * 0.5 + 0.1;
-  }
-  update() {
-    this.x += this.speedX; this.y += this.speedY;
-    if (this.x < 0) this.x = canvas.width; if (this.x > canvas.width) this.x = 0;
-    if (this.y < 0) this.y = canvas.height; if (this.y > canvas.height) this.y = 0;
-  }
-  draw() {
-    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(59,130,246,${this.opacity})`; ctx.fill();
-  }
-}
-function initParticles() {
-  particles = [];
-  const count = Math.min(60, Math.floor((canvas.width * canvas.height) / 20000));
-  for (let i = 0; i < count; i++) particles.push(new Particle());
-}
-initParticles();
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((p1, i) => {
-    p1.update(); p1.draw();
-    particles.slice(i + 1).forEach(p2 => {
-      const dx = p1.x - p2.x, dy = p1.y - p2.y, dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 130) {
-        ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = `rgba(59,130,246,${0.06 * (1 - dist / 130)})`; ctx.lineWidth = 0.5; ctx.stroke();
-      }
-    });
-  });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
 
 // ============ SCROLL REVEAL ============
 const revealElements = document.querySelectorAll('.section,.service-card,.stat-card,.commit-card');
