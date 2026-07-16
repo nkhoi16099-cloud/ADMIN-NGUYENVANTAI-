@@ -13,7 +13,7 @@ document.addEventListener('mousemove',e=>{
 
 // ============ TYPING EFFECT ============
 const typingElement=document.getElementById('typing-text');
-const textToType='CHECK UY TÍN NGUYỄN VĂN TÀI STORE';
+const textToType='CHECK UY TÍN ADMIN NGUYỄN VĂN TÀI';
 let charIndex=0;
 function type(){
   if(charIndex<textToType.length){
